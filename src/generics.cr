@@ -1,8 +1,12 @@
 
-class BoundedStaticSet(T, N, L)
+class BoundedStaticSet(T, L, H)
+  # this is a workaround to perform arithmentics with type args
+  private macro items_static_array_type
+    {{ "StaticArray(Bool, #{H - L + 1})".id }}
+  end
+
   def initialize
-    @items = StaticArray(Bool, N).new(false)
-    @h = L + N - 1
+    @items = items_static_array_type.new(false)
   end
 
   def includes?(e : T)
@@ -14,7 +18,7 @@ class BoundedStaticSet(T, N, L)
   end
 
   def can_include?(e : T)
-    L <= e && e <= @h
+    L <= e && e <= H
   end
 
   private def index_for(e)

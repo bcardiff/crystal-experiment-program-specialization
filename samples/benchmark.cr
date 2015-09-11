@@ -23,6 +23,6 @@ Benchmark.ips do |x|
   end
 
   x.report("generics") do
-    perform CompositeStaticSet(Int32, BoundedStaticSet(Int32, 10, 1), BoundedStaticSet(Int32, 10, 11)).new
+    perform CompositeStaticSet(Int32, BoundedStaticSet(Int32, 1, 10), BoundedStaticSet(Int32, 11, 20)).new
   end
 end
